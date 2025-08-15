@@ -36,6 +36,9 @@
 ;; Load core utilities first
 (require 'claude-code-ide-mcp-tools-core)
 
+;; Add tools directory to load path for submodules
+(add-to-list 'load-path (expand-file-name "tools" (file-name-directory (or load-file-name buffer-file-name))))
+
 ;; Load all implemented tool categories
 (require 'claude-code-ide-mcp-tools-lsp)
 (require 'claude-code-ide-mcp-tools-nav)
