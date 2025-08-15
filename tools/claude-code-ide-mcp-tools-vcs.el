@@ -119,7 +119,6 @@
 
 ;;; Registration function
 
-;;;###autoload
 (defun claude-code-ide-mcp-tools-register-vcs-tools ()
   "Register all VCS tools with claude-code-ide."
   (claude-code-ide-mcp-tools-register-pending))

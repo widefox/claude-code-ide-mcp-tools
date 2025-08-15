@@ -243,7 +243,6 @@
 
 ;;; Registration function
 
-;;;###autoload
 (defun claude-code-ide-mcp-tools-register-doc-tools ()
   "Register all documentation tools with claude-code-ide."
   (claude-code-ide-mcp-tools-register-pending))

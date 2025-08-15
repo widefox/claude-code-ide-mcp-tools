@@ -296,7 +296,6 @@
 
 ;;; Registration function
 
-;;;###autoload
 (defun claude-code-ide-mcp-tools-register-project-tools ()
   "Register all project tools with claude-code-ide."
   (claude-code-ide-mcp-tools-register-pending))
