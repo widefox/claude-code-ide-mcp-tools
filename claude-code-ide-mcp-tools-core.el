@@ -36,8 +36,7 @@ Returns the detected backend symbol or nil if none available."
            ((featurep 'project) 'project)  ; Built-in since Emacs 25
            (t nil)))
     ('vcs
-     (cond ((featurep 'magit) 'magit)
-           (t 'vc)))  ; vc is always available
+     (cond (t 'git)))  ; git commands always available
     (_ nil)))
 
 (defun claude-code-ide-mcp-tools-get-backend (category)

@@ -10,13 +10,13 @@
 
 ;;; Commentary:
 
-;; This package extends Claude Code IDE with 35+ comprehensive MCP tools
+;; This package extends Claude Code IDE with 40+ comprehensive MCP tools
 ;; across multiple categories. It provides backend-agnostic implementations
 ;; that work with user's preferred packages:
 ;;
 ;; - Language Servers: lsp-mode, eglot, or built-in xref
 ;; - Project Management: projectile, project.el
-;; - Version Control: magit, vc
+;; - Version Control: git commands, vc
 ;; - Plus navigation, editing, documentation, and TreeSitter tools
 ;;
 ;; Installation:
@@ -46,11 +46,11 @@
 (defcustom claude-code-ide-mcp-tools-backends
   '((lsp . auto)      ; auto-detect: lsp-mode, eglot, or xref fallback
     (project . auto)  ; auto-detect: projectile, project.el
-    (vcs . auto))     ; auto-detect: magit, vc
+    (vcs . auto))     ; auto-detect: git, vc
   "Backend preferences for each tool category.
 Each entry is (CATEGORY . BACKEND) where BACKEND can be:
 - auto: Auto-detect best available backend
-- Specific backend: lsp-mode, eglot, projectile, project, magit, vc"
+- Specific backend: lsp-mode, eglot, projectile, project, git, vc"
   :type '(alist :key-type (choice (const lsp)
                                   (const project)
                                   (const vcs))
@@ -59,7 +59,7 @@ Each entry is (CATEGORY . BACKEND) where BACKEND can be:
                                    (const eglot)
                                    (const projectile)
                                    (const project)
-                                   (const magit)
+                                   (const git)
                                    (const vc)))
   :group 'claude-code-ide-mcp-tools)
 

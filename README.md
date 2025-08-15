@@ -10,7 +10,7 @@ This package extends [Claude Code IDE](https://github.com/manzaltu/claude-code-i
 ## Features
 
 🎯 **40+ MCP Tools** across 9 categories  
-🔧 **Backend Agnostic** - works with lsp-mode/eglot, projectile/project.el, magit/vc  
+🔧 **Backend Agnostic** - works with lsp-mode/eglot, projectile/project.el, git/vc  
 🚀 **Auto-Detection** - automatically uses the best available backend  
 📦 **Zero Hard Dependencies** - works with vanilla Emacs, enhanced with optional packages  
 🎨 **Modular Design** - enable only the tool categories you need  
@@ -71,12 +71,12 @@ This package extends [Claude Code IDE](https://github.com/manzaltu/claude-code-i
 *Backends: projectile with test framework detection*
 
 ### Git Integration (4 tools)
-- **magit_status_summary** - Git status overview
-- **magit_diff_summary** - Git diff summary
+- **git_status_summary** - Git status overview
+- **git_diff_summary** - Git diff summary
 - **git_blame_at_line** - Git blame for specific line
-- **magit_log_file** - Commit history for file
+- **git_log_file** - Commit history for file
 
-*Backends: magit, built-in vc*
+*Uses direct git commands with optional vc backend*
 
 ### Code Snippets (2 tools)
 - **yasnippet_list_snippets** - List available snippets
@@ -125,8 +125,7 @@ For full functionality, consider installing:
 ;; Project management  
 (use-package projectile) ; OR use built-in project.el
 
-;; Git integration
-(use-package magit)      ; OR use built-in vc
+;; Git integration - uses direct git commands, no additional packages needed
 
 ;; Code snippets
 (use-package yasnippet)
@@ -171,9 +170,9 @@ git clone https://github.com/Kaylebor/claude-code-ide-mcp-tools.git
 (setq claude-code-ide-mcp-tools-backends
       '((lsp . eglot)        ; Prefer eglot over lsp-mode
         (project . project)   ; Use built-in project.el
-        (vcs . magit)))       ; Use magit for git operations
+        (vcs . git)))        ; Use git commands directly
 
-;; Or use auto-detection (default)
+;; Or use auto-detection (default) - git commands used automatically
 (setq claude-code-ide-mcp-tools-backends
       '((lsp . auto)
         (project . auto)
@@ -202,7 +201,7 @@ git clone https://github.com/Kaylebor/claude-code-ide-mcp-tools.git
   (claude-code-ide-mcp-tools-backends
    '((lsp . lsp-mode)
      (project . projectile)
-     (vcs . magit)))
+     (vcs . git)))
   
   ;; Tool categories to enable
   (claude-code-ide-mcp-tools-enable-categories
@@ -240,7 +239,7 @@ Claude: Let me navigate there and examine the code.
 
 ## Backend Compatibility
 
-| Feature | lsp-mode | eglot | xref | projectile | project.el | magit | vc |
+| Feature | lsp-mode | eglot | xref | projectile | project.el | git | vc |
 |---------|----------|-------|------|------------|------------|-------|-----|
 | Symbol Info | ✅ Full | ✅ Basic | ✅ Basic | N/A | N/A | N/A | N/A |
 | Definitions | ✅ Full | 🚧 Planned | ✅ Basic | N/A | N/A | N/A | N/A |
@@ -305,7 +304,7 @@ This shows:
 - Verify `claude-code-ide-enable-mcp-server` is `t`
 
 ### "Backend not detected"
-- Install the desired backend package (lsp-mode, projectile, magit)
+- Install the desired backend package (lsp-mode, projectile)
 - Ensure the package is properly loaded and activated
 - Check `claude-code-ide-mcp-tools-info` for detection status
 
