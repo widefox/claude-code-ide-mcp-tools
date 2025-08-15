@@ -39,6 +39,15 @@
 ;; Load core utilities first - but defer tool loading until setup
 (require 'claude-code-ide-mcp-tools-core)
 
+;; Function declarations for tool registration functions (loaded at runtime)
+(declare-function claude-code-ide-mcp-tools-register-lsp-tools "claude-code-ide-mcp-tools-lsp")
+(declare-function claude-code-ide-mcp-tools-register-nav-tools "claude-code-ide-mcp-tools-nav")
+(declare-function claude-code-ide-mcp-tools-register-project-tools "claude-code-ide-mcp-tools-project")
+(declare-function claude-code-ide-mcp-tools-register-vcs-tools "claude-code-ide-mcp-tools-vcs")
+(declare-function claude-code-ide-mcp-tools-register-edit-tools "claude-code-ide-mcp-tools-edit")
+(declare-function claude-code-ide-mcp-tools-register-doc-tools "claude-code-ide-mcp-tools-doc")
+(declare-function claude-code-ide-mcp-tools-register-treesit-tools "claude-code-ide-mcp-tools-treesit")
+
 ;;; Customization
 
 (defgroup claude-code-ide-mcp-tools nil
