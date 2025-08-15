@@ -166,11 +166,14 @@ Automatically handles type conversion for common numeric parameters."
     is-optional))
 
 (defun claude-code-ide-mcp-tools-register-pending ()
-  "Register all pending tools with claude-code-ide."
+  "Register all pending tools with claude-code-ide.
+This should only be called once to avoid duplicate registrations."
   (let ((count 0))
     (dolist (tool-info claude-code-ide-mcp-tools--tool-list)
       (apply #'claude-code-ide-make-tool tool-info)
       (cl-incf count))
+    ;; Clear the list to prevent duplicate registrations
+    (setq claude-code-ide-mcp-tools--tool-list nil)
     count))
 
 ;;; Error Handling

@@ -97,30 +97,8 @@ This function should be called after claude-code-ide is loaded."
   (when (treesit-available-p)
     (require 'claude-code-ide-mcp-tools-treesit))
   
-  ;; Register tools from enabled categories
-  (let ((registered-count 0))
-    (when (memq 'lsp claude-code-ide-mcp-tools-enable-categories)
-      (setq registered-count (+ registered-count (claude-code-ide-mcp-tools-register-lsp-tools))))
-    
-    (when (memq 'project claude-code-ide-mcp-tools-enable-categories)
-      (setq registered-count (+ registered-count (claude-code-ide-mcp-tools-register-project-tools))))
-    
-    (when (memq 'vcs claude-code-ide-mcp-tools-enable-categories)
-      (setq registered-count (+ registered-count (claude-code-ide-mcp-tools-register-vcs-tools))))
-    
-    (when (memq 'nav claude-code-ide-mcp-tools-enable-categories)
-      (setq registered-count (+ registered-count (claude-code-ide-mcp-tools-register-nav-tools))))
-    
-    (when (memq 'edit claude-code-ide-mcp-tools-enable-categories)
-      (setq registered-count (+ registered-count (claude-code-ide-mcp-tools-register-edit-tools))))
-    
-    (when (memq 'doc claude-code-ide-mcp-tools-enable-categories)
-      (setq registered-count (+ registered-count (claude-code-ide-mcp-tools-register-doc-tools))))
-    
-    (when (and (memq 'treesit claude-code-ide-mcp-tools-enable-categories)
-               (treesit-available-p))
-      (setq registered-count (+ registered-count (claude-code-ide-mcp-tools-register-treesit-tools))))
-    
+  ;; Register all tools once (all tools are already added to the list by requiring modules)
+  (let ((registered-count (claude-code-ide-mcp-tools-register-pending)))
     (message "claude-code-ide-mcp-tools-setup: Registered %d MCP tools with Claude Code IDE" registered-count)))
 
 ;;;###autoload
