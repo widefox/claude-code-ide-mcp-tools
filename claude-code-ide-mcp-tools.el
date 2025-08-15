@@ -33,20 +33,17 @@
 (require 'claude-code-ide-mcp-server)
 (require 'cl-lib)
 
-;; Add tools directory to load path for submodules first
-(add-to-list 'load-path (expand-file-name "tools" (file-name-directory (or load-file-name buffer-file-name))))
-
-;; Load core utilities first - but defer tool loading until setup
+;; Load core utilities
 (require 'claude-code-ide-mcp-tools-core)
 
-;; Function declarations for tool registration functions (loaded at runtime)
-(declare-function claude-code-ide-mcp-tools-register-lsp-tools "claude-code-ide-mcp-tools-lsp")
-(declare-function claude-code-ide-mcp-tools-register-nav-tools "claude-code-ide-mcp-tools-nav")
-(declare-function claude-code-ide-mcp-tools-register-project-tools "claude-code-ide-mcp-tools-project")
-(declare-function claude-code-ide-mcp-tools-register-vcs-tools "claude-code-ide-mcp-tools-vcs")
-(declare-function claude-code-ide-mcp-tools-register-edit-tools "claude-code-ide-mcp-tools-edit")
-(declare-function claude-code-ide-mcp-tools-register-doc-tools "claude-code-ide-mcp-tools-doc")
-(declare-function claude-code-ide-mcp-tools-register-treesit-tools "claude-code-ide-mcp-tools-treesit")
+;; Autoload tool registration functions
+;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-lsp-tools "tools/claude-code-ide-mcp-tools-lsp")
+;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-nav-tools "tools/claude-code-ide-mcp-tools-nav")
+;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-project-tools "tools/claude-code-ide-mcp-tools-project")
+;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-vcs-tools "tools/claude-code-ide-mcp-tools-vcs")
+;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-edit-tools "tools/claude-code-ide-mcp-tools-edit")
+;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-doc-tools "tools/claude-code-ide-mcp-tools-doc")
+;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-treesit-tools "tools/claude-code-ide-mcp-tools-treesit")
 
 ;;; Customization
 
@@ -99,15 +96,6 @@ This function should be called after claude-code-ide is loaded."
   ;; Ensure MCP server is enabled
   (setq claude-code-ide-enable-mcp-server t)
   
-  ;; Load all tool categories now that dependencies are ready
-  (require 'claude-code-ide-mcp-tools-lsp)
-  (require 'claude-code-ide-mcp-tools-nav)
-  (require 'claude-code-ide-mcp-tools-project)
-  (require 'claude-code-ide-mcp-tools-vcs)
-  (require 'claude-code-ide-mcp-tools-edit)
-  (require 'claude-code-ide-mcp-tools-doc)
-  (require 'claude-code-ide-mcp-tools-treesit)
-  
   ;; Register tools from enabled categories
   (let ((registered-count 0))
     (when (memq 'lsp claude-code-ide-mcp-tools-enable-categories)
@@ -132,7 +120,7 @@ This function should be called after claude-code-ide is loaded."
                (treesit-available-p))
       (setq registered-count (+ registered-count (claude-code-ide-mcp-tools-register-treesit-tools))))
     
-    (message "Registered %d MCP tools with Claude Code IDE" registered-count)))
+    (message "claude-code-ide-mcp-tools-setup: Registered %d MCP tools with Claude Code IDE" registered-count)))
 
 ;;;###autoload
 (defun claude-code-ide-mcp-tools-info ()
