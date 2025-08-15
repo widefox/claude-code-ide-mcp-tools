@@ -5,82 +5,113 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Emacs](https://img.shields.io/badge/Emacs-28.1+-purple.svg)](https://www.gnu.org/software/emacs/)
 
-This package extends [Claude Code IDE](https://github.com/username/claude-code-ide) with 35+ comprehensive MCP (Model Context Protocol) tools across multiple categories. It provides backend-agnostic implementations that automatically adapt to your preferred Emacs packages.
+This package extends [Claude Code IDE](https://github.com/Kaylebor/claude-code-ide) with 40+ comprehensive MCP (Model Context Protocol) tools across multiple categories. It provides backend-agnostic implementations that automatically adapt to your preferred Emacs packages.
 
 ## Features
 
-🎯 **35+ MCP Tools** across 7 categories  
+🎯 **40+ MCP Tools** across 9 categories  
 🔧 **Backend Agnostic** - works with lsp-mode/eglot, projectile/project.el, magit/vc  
 🚀 **Auto-Detection** - automatically uses the best available backend  
 📦 **Zero Hard Dependencies** - works with vanilla Emacs, enhanced with optional packages  
 🎨 **Modular Design** - enable only the tool categories you need  
 🧪 **Well Tested** - comprehensive test suite included  
 
-## Tool Categories
+## Complete Tool List
 
-### Language Server Integration
-- **describe_symbol** - Get comprehensive symbol information
-- **find_definition** - Jump to symbol definitions  
-- **find_references** - Find all symbol references
-- **get_hover_info** - Get documentation at point
+### Symbol Navigation & Analysis (5 tools)
+- **describe_symbol** - Get comprehensive symbol information at position
+- **find_definition** - Find symbol definition  
+- **find_references** - Find all references to a symbol
+- **xref_find_apropos** - Find symbols matching a pattern
+- **which_function_at_point** - Get function name at position
 
 *Backends: lsp-mode, eglot, or xref fallback*
 
-### Project Navigation
-- **find_file** - Find files by pattern
-- **grep_project** - Search across project files
-- **list_project_files** - Get project file listing
-- **get_project_root** - Get project root directory
+### Project Management (5 tools)
+- **projectile_find_file** - Find files by pattern (fuzzy search)
+- **projectile_grep** - Search text across project files
+- **projectile_list_projects** - List all known projects
+- **projectile_switch_project** - Switch to different project
+- **projectile_current_project** - Get current project info
 
 *Backends: projectile, project.el*
 
-### Version Control
-- **show_status** - Get repository status
-- **show_blame** - Show git blame for file/line
-- **show_log** - Get file history
-- **show_diff** - Show file differences
+### Search & Discovery (3 tools)
+- **rg_search** - Advanced ripgrep with file type filtering
+- **consult_grep** - Interactive grep with live preview
+- **occur_find_pattern** - Find pattern occurrences in file
+
+*Uses ripgrep when available*
+
+### File Structure & Symbols (2 tools)
+- **imenu_list_all_symbols** - List all symbols in file
+- **goto_symbol** - Jump to specific symbol by name
+
+*Always available*
+
+### Cursor & Navigation (4 tools)
+- **goto_line_column** - Move cursor to specific position
+- **get_cursor_position** - Get current cursor position
+- **save_cursor_position** - Save position with name
+- **restore_cursor_position** - Restore saved position
+
+*Always available*
+
+### Code Editing (2 tools)
+- **comment_region** - Toggle comments for line range
+- **indent_region** - Fix indentation for line range
+
+*Always available*
+
+### Testing & Development (3 tools)
+- **detect_test_framework** - Detect project test configuration
+- **run_file_tests** - Run tests for specific file
+- **run_project_tests** - Run all project tests
+
+*Backends: projectile with test framework detection*
+
+### Git Integration (4 tools)
+- **magit_status_summary** - Git status overview
+- **magit_diff_summary** - Git diff summary
+- **git_blame_at_line** - Git blame for specific line
+- **magit_log_file** - Commit history for file
 
 *Backends: magit, built-in vc*
 
-### Navigation & Cursor Management
-- **goto_line_column** - Move to specific position
-- **get_cursor_position** - Get current cursor info
-- **save_cursor_position** - Bookmark positions
-- **restore_cursor_position** - Return to bookmarks
-- **goto_symbol** - Jump to symbols with fuzzy matching
+### Code Snippets (2 tools)
+- **yasnippet_list_snippets** - List available snippets
+- **yasnippet_insert_snippet** - Insert snippet at position
+
+*Requires yasnippet package*
+
+### Documentation & Help (4 tools)
+- **describe_function** - Get Emacs function documentation
+- **describe_variable** - Get variable documentation
+- **apropos_command** - Find commands matching pattern
+- **which_key_help** - Check which-key mode status
 
 *Always available*
 
-### Text Editing
-- **comment_region** - Comment/uncomment text
-- **indent_region** - Fix indentation
-- **replace_text** - Replace text in regions
-- **insert_text** - Insert text at positions
-
-*Always available*
-
-### Documentation & Help
-- **describe_function** - Get function documentation
-- **describe_variable** - Get variable information
-- **list_symbols** - List file symbols via imenu
-- **search_documentation** - Search help content
-
-*Always available*
-
-### TreeSitter Analysis
-- **analyze_structure** - Get syntax tree structure
-- **get_node_at_point** - Get AST node information
-- **find_parent_node** - Find parent nodes by type
-- **get_children** - Get child nodes
+### TreeSitter Analysis (4 tools)
+- **treesit_analyze_structure** - Get complete syntax tree
+- **treesit_get_node_at_point** - Get node info at position
+- **treesit_find_parent_node** - Find parent node of type
+- **treesit_get_children** - Get child nodes
 
 *Available when TreeSitter is supported*
+
+### Buffer Management (2 tools)
+- **list_open_buffers** - List all open buffers
+- **recent_files** - Show recently opened files
+
+*Always available*
 
 ## Installation
 
 ### Prerequisites
 
 - Emacs 28.1+
-- [claude-code-ide](https://github.com/username/claude-code-ide)
+- [claude-code-ide](https://github.com/Kaylebor/claude-code-ide)
 
 ### Optional Enhancements
 
@@ -96,20 +127,24 @@ For full functionality, consider installing:
 
 ;; Git integration
 (use-package magit)      ; OR use built-in vc
+
+;; Code snippets
+(use-package yasnippet)
 ```
 
 ### Via Package Manager
 
 ```elisp
-;; With use-package
+;; With use-package + elpaca
 (use-package claude-code-ide-mcp-tools
+  :elpaca (:host github :repo "Kaylebor/claude-code-ide-mcp-tools")
   :after claude-code-ide
   :config
   (claude-code-ide-mcp-tools-setup))
 
 ;; With straight.el
 (use-package claude-code-ide-mcp-tools
-  :straight (:host github :repo "enderveiga/claude-code-ide-mcp-tools")
+  :straight (:host github :repo "Kaylebor/claude-code-ide-mcp-tools")
   :after claude-code-ide
   :config
   (claude-code-ide-mcp-tools-setup))
@@ -118,7 +153,7 @@ For full functionality, consider installing:
 ### Manual Installation
 
 ```bash
-git clone https://github.com/enderveiga/claude-code-ide-mcp-tools.git
+git clone https://github.com/Kaylebor/claude-code-ide-mcp-tools.git
 ```
 
 ```elisp
@@ -160,6 +195,7 @@ git clone https://github.com/enderveiga/claude-code-ide-mcp-tools.git
 
 ```elisp
 (use-package claude-code-ide-mcp-tools
+  :elpaca (:host github :repo "Kaylebor/claude-code-ide-mcp-tools")
   :after claude-code-ide
   :custom
   ;; Backend preferences
@@ -189,6 +225,7 @@ Once installed and configured, the tools are automatically available to Claude t
 - Edit code with proper indentation and comments
 - Access Emacs documentation and help
 - Analyze code structure with TreeSitter
+- Manage git operations and project workflow
 
 Example Claude interaction:
 ```
@@ -219,24 +256,23 @@ Claude: Let me navigate there and examine the code.
 
 ```
 claude-code-ide-mcp-tools/
-├── claude-code-ide-mcp-tools.el      # Main entry point
-├── claude-code-ide-mcp-tools-core.el # Core utilities
-├── tools/                             # Tool implementations
-│   ├── claude-code-ide-mcp-tools-lsp.el
-│   ├── claude-code-ide-mcp-tools-project.el
-│   ├── claude-code-ide-mcp-tools-vcs.el
-│   ├── claude-code-ide-mcp-tools-nav.el
-│   ├── claude-code-ide-mcp-tools-edit.el
-│   ├── claude-code-ide-mcp-tools-doc.el
-│   └── claude-code-ide-mcp-tools-treesit.el
-└── test/                              # Test suite
+├── claude-code-ide-mcp-tools.el         # Main entry point
+├── claude-code-ide-mcp-tools-core.el    # Core utilities
+├── claude-code-ide-mcp-tools-lsp.el     # Language server tools
+├── claude-code-ide-mcp-tools-project.el # Project management tools
+├── claude-code-ide-mcp-tools-vcs.el     # Version control tools
+├── claude-code-ide-mcp-tools-nav.el     # Navigation tools
+├── claude-code-ide-mcp-tools-edit.el    # Editing tools
+├── claude-code-ide-mcp-tools-doc.el     # Documentation tools
+├── claude-code-ide-mcp-tools-treesit.el # TreeSitter tools
+└── test/                                 # Test suite
 ```
 
 ### Running Tests
 
 ```bash
 # Run all tests
-emacs -batch -L . -l ert -l test/claude-code-ide-mcp-tools-test.el \\
+emacs -batch -L . -l ert -l test/claude-code-ide-mcp-tools-test.el \
   -f ert-run-tests-batch-and-exit
 ```
 
@@ -284,7 +320,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- [Claude Code IDE](https://github.com/username/claude-code-ide) for the MCP infrastructure
+- [Claude Code IDE](https://github.com/Kaylebor/claude-code-ide) for the MCP infrastructure
 - [Anthropic](https://anthropic.com) for the Model Context Protocol specification
 - The Emacs community for the excellent ecosystem of packages
 
