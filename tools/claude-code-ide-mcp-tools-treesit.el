@@ -167,6 +167,7 @@
 
 ;;; Registration function
 
+;;;###autoload
 (defun claude-code-ide-mcp-tools-register-treesit-tools ()
   "Register all TreeSitter tools with claude-code-ide."
   (claude-code-ide-mcp-tools-register-pending))

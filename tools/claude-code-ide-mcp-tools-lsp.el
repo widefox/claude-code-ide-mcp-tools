@@ -206,6 +206,7 @@
 
 ;;; Registration function
 
+;;;###autoload
 (defun claude-code-ide-mcp-tools-register-lsp-tools ()
   "Register all LSP tools with claude-code-ide."
   (claude-code-ide-mcp-tools-register-pending))

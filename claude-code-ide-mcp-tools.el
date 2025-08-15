@@ -36,14 +36,8 @@
 ;; Load core utilities
 (require 'claude-code-ide-mcp-tools-core)
 
-;; Autoload tool registration functions
-;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-lsp-tools "tools/claude-code-ide-mcp-tools-lsp")
-;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-nav-tools "tools/claude-code-ide-mcp-tools-nav")
-;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-project-tools "tools/claude-code-ide-mcp-tools-project")
-;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-vcs-tools "tools/claude-code-ide-mcp-tools-vcs")
-;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-edit-tools "tools/claude-code-ide-mcp-tools-edit")
-;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-doc-tools "tools/claude-code-ide-mcp-tools-doc")
-;;;###autoload (autoload 'claude-code-ide-mcp-tools-register-treesit-tools "tools/claude-code-ide-mcp-tools-treesit")
+;; Add tools directory to load path 
+(add-to-list 'load-path (expand-file-name "tools" (file-name-directory (or load-file-name buffer-file-name))))
 
 ;;; Customization
 

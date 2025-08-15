@@ -179,6 +179,7 @@ Tries exact match first, then partial match, then substring match."
 
 ;;; Registration function
 
+;;;###autoload
 (defun claude-code-ide-mcp-tools-register-nav-tools ()
   "Register all navigation tools with claude-code-ide."
   (claude-code-ide-mcp-tools-register-pending))
