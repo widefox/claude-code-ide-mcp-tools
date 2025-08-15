@@ -33,20 +33,11 @@
 (require 'claude-code-ide-mcp-server)
 (require 'cl-lib)
 
-;; Load core utilities first
-(require 'claude-code-ide-mcp-tools-core)
-
-;; Add tools directory to load path for submodules
+;; Add tools directory to load path for submodules first
 (add-to-list 'load-path (expand-file-name "tools" (file-name-directory (or load-file-name buffer-file-name))))
 
-;; Load all implemented tool categories
-(require 'claude-code-ide-mcp-tools-lsp)
-(require 'claude-code-ide-mcp-tools-nav)
-(require 'claude-code-ide-mcp-tools-project)
-(require 'claude-code-ide-mcp-tools-vcs)
-(require 'claude-code-ide-mcp-tools-edit)
-(require 'claude-code-ide-mcp-tools-doc)
-(require 'claude-code-ide-mcp-tools-treesit)
+;; Load core utilities first - but defer tool loading until setup
+(require 'claude-code-ide-mcp-tools-core)
 
 ;;; Customization
 
@@ -98,6 +89,15 @@ This function should be called after claude-code-ide is loaded."
   
   ;; Ensure MCP server is enabled
   (setq claude-code-ide-enable-mcp-server t)
+  
+  ;; Load all tool categories now that dependencies are ready
+  (require 'claude-code-ide-mcp-tools-lsp)
+  (require 'claude-code-ide-mcp-tools-nav)
+  (require 'claude-code-ide-mcp-tools-project)
+  (require 'claude-code-ide-mcp-tools-vcs)
+  (require 'claude-code-ide-mcp-tools-edit)
+  (require 'claude-code-ide-mcp-tools-doc)
+  (require 'claude-code-ide-mcp-tools-treesit)
   
   ;; Register tools from enabled categories
   (let ((registered-count 0))
