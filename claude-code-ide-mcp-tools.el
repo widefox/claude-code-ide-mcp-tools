@@ -10,7 +10,7 @@
 
 ;;; Commentary:
 
-;; This package extends Claude Code IDE with 40+ comprehensive MCP tools
+;; This package extends Claude Code IDE with 38 additional MCP tools
 ;; across multiple categories. It provides backend-agnostic implementations
 ;; that work with user's preferred packages:
 ;;

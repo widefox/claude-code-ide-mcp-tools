@@ -98,51 +98,6 @@
       (error
        (format "Error checking which-key: %s" (error-message-string err))))))
 
-(claude-code-ide-mcp-tools-define-tool imenu-list-all-symbols (file-path)
-  "List all symbols (functions, classes, variables) in a file using imenu.
-  
-  FILE-PATH - Path to the file to analyze for symbols
-  
-  Provides a comprehensive overview of file structure."
-  (if (not file-path)
-      (error "file_path parameter is required")
-    (progn
-      (condition-case err
-          (let ((target-buffer (or (find-buffer-visiting file-path)
-                                   (find-file-noselect file-path))))
-            (with-current-buffer target-buffer
-              (imenu--make-index-alist)
-              (if imenu--index-alist
-                  (let ((results '()))
-                    (dolist (item imenu--index-alist)
-                      (cond
-                       ((string-match-p "^\\*" (car item)) nil) ; Skip special entries
-                       ((markerp (cdr item))
-                        (let ((line (line-number-at-pos (marker-position (cdr item)))))
-                          (push (format "%s:%d: %s" file-path line (car item)) results)))
-                       ((numberp (cdr item))
-                        (let ((line (line-number-at-pos (cdr item))))
-                          (push (format "%s:%d: %s" file-path line (car item)) results)))
-                       ((listp (cdr item))
-                        (let ((category (car item)))
-                          (dolist (subitem (cdr item))
-                            (when (and (consp subitem)
-                                       (or (markerp (cdr subitem)) (numberp (cdr subitem))))
-                              (let ((line (line-number-at-pos
-                                           (if (markerp (cdr subitem))
-                                               (marker-position (cdr subitem))
-                                             (cdr subitem)))))
-                                (push (format "%s:%d: [%s] %s" 
-                                              file-path line category (car subitem)) 
-                                      results))))))))
-                    (if results
-                        (nreverse results)
-                      (format "No symbols found in %s" file-path)))
-                (format "No imenu support for %s" file-path))))
-        (error
-         (format "Error listing symbols in %s: %s"
-                 file-path (error-message-string err)))))))
-
 (claude-code-ide-mcp-tools-define-tool occur-find-pattern (file-path pattern)
   "Find all occurrences of a pattern within a specific file.
   
@@ -178,40 +133,6 @@
          (format "Error finding pattern '%s' in %s: %s"
                  pattern file-path (error-message-string err)))))))
 
-(claude-code-ide-mcp-tools-define-tool xref-find-apropos (pattern file-path)
-  "Find symbols matching a pattern using xref across the project.
-  
-  PATTERN - Pattern to match against symbol names
-  FILE-PATH - File path to use as context for the search
-  
-  Leverages language server or tags for intelligent symbol search."
-  (if (not file-path)
-      (error "file_path parameter is required")
-    (progn
-      (condition-case err
-          (let ((target-buffer (or (find-buffer-visiting file-path)
-                                   (find-file-noselect file-path))))
-            (with-current-buffer target-buffer
-              (let ((backend (xref-find-backend)))
-                (if (not backend)
-                    (format "No xref backend available for %s" file-path)
-                  (let ((xref-items (xref-backend-apropos backend pattern)))
-                    (if xref-items
-                        (mapcar (lambda (item)
-                                  (let* ((location (xref-item-location item))
-                                         (file (xref-location-group location))
-                                         (marker (xref-location-marker location))
-                                         (line (with-current-buffer (marker-buffer marker)
-                                                 (save-excursion
-                                                   (goto-char marker)
-                                                   (line-number-at-pos))))
-                                         (summary (xref-item-summary item)))
-                                    (format "%s:%d: %s" file line summary)))
-                                xref-items)
-                      (format "No symbols found matching pattern '%s'" pattern)))))))
-        (error
-         (format "Error finding symbols matching '%s' in %s: %s"
-                 pattern file-path (error-message-string err)))))))
 
 (claude-code-ide-mcp-tools-define-tool which-function-at-point (file-path line column)
   "Get the name of the function or method at a specific position.

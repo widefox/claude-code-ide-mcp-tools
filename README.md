@@ -5,18 +5,30 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Emacs](https://img.shields.io/badge/Emacs-28.1+-purple.svg)](https://www.gnu.org/software/emacs/)
 
-This package extends [Claude Code IDE](https://github.com/manzaltu/claude-code-ide.el) with 40+ comprehensive MCP (Model Context Protocol) tools across multiple categories. It provides backend-agnostic implementations that automatically adapt to your preferred Emacs packages.
+This package extends [Claude Code IDE](https://github.com/manzaltu/claude-code-ide.el) with 38 additional comprehensive MCP (Model Context Protocol) tools across multiple categories. It provides backend-agnostic implementations that automatically adapt to your preferred Emacs packages.
 
 ## Features
 
-🎯 **40+ MCP Tools** across 9 categories  
+🎯 **38 Additional MCP Tools** across 9 categories  
 🔧 **Backend Agnostic** - works with lsp-mode/eglot, projectile/project.el, git/vc  
 🚀 **Auto-Detection** - automatically uses the best available backend  
 📦 **Zero Hard Dependencies** - works with vanilla Emacs, enhanced with optional packages  
 🎨 **Modular Design** - enable only the tool categories you need  
 🧪 **Well Tested** - comprehensive test suite included  
 
-## Complete Tool List
+## Relationship to Claude Code IDE
+
+This package **extends** the base [Claude Code IDE](https://github.com/manzaltu/claude-code-ide.el) package rather than replacing it. The base package provides 5 core tools:
+
+- **xref-find-references** - Find symbol references (we provide enhanced LSP version)
+- **xref-find-apropos** - Search symbols by pattern (provided by base package)
+- **project-info** - Project overview (provided by base package)
+- **imenu-list-symbols** - List file symbols (provided by base package)  
+- **treesit-info** - Basic TreeSitter info (we provide 4 enhanced TreeSitter tools)
+
+Our package adds **38 additional tools** with enhanced functionality, better backend detection, and comprehensive development workflow support.
+
+## Complete Additional Tool List
 
 ### Symbol Navigation & Analysis (5 tools)
 - **describe_symbol** - Get comprehensive symbol information at position
@@ -43,8 +55,7 @@ This package extends [Claude Code IDE](https://github.com/manzaltu/claude-code-i
 
 *Uses ripgrep when available*
 
-### File Structure & Symbols (2 tools)
-- **imenu_list_all_symbols** - List all symbols in file
+### File Structure & Symbols (1 tool)
 - **goto_symbol** - Jump to specific symbol by name
 
 *Always available*
