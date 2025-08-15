@@ -2,11 +2,11 @@
 
 ;; Copyright (C) 2025
 
-;; Author: Ender Veiga Bueno
+;; Author: Ender Veiga Bueno <letstalk@ender.codes>
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "28.1") (claude-code-ide "0.1"))
 ;; Keywords: ai, claude, mcp, tools, convenience
-;; URL: https://github.com/yourusername/claude-code-ide-mcp-tools
+;; URL: https://github.com/Kaylebor/claude-code-ide-mcp-tools
 
 ;;; Commentary:
 
@@ -35,9 +35,6 @@
 
 ;; Load core utilities
 (require 'claude-code-ide-mcp-tools-core)
-
-;; Add tools directory to load path 
-(add-to-list 'load-path (expand-file-name "tools" (file-name-directory (or load-file-name buffer-file-name))))
 
 ;;; Customization
 
@@ -89,6 +86,16 @@ This function should be called after claude-code-ide is loaded."
   
   ;; Ensure MCP server is enabled
   (setq claude-code-ide-enable-mcp-server t)
+  
+  ;; Load tool modules explicitly (autoload cookies don't work for programmatic calls)
+  (require 'claude-code-ide-mcp-tools-lsp)
+  (require 'claude-code-ide-mcp-tools-project) 
+  (require 'claude-code-ide-mcp-tools-vcs)
+  (require 'claude-code-ide-mcp-tools-nav)
+  (require 'claude-code-ide-mcp-tools-edit)
+  (require 'claude-code-ide-mcp-tools-doc)
+  (when (treesit-available-p)
+    (require 'claude-code-ide-mcp-tools-treesit))
   
   ;; Register tools from enabled categories
   (let ((registered-count 0))
