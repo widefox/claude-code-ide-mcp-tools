@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Emacs](https://img.shields.io/badge/Emacs-28.1+-purple.svg)](https://www.gnu.org/software/emacs/)
 
-This package extends [Claude Code IDE](https://github.com/Kaylebor/claude-code-ide) with 40+ comprehensive MCP (Model Context Protocol) tools across multiple categories. It provides backend-agnostic implementations that automatically adapt to your preferred Emacs packages.
+This package extends [Claude Code IDE](https://github.com/manzaltu/claude-code-ide.el) with 40+ comprehensive MCP (Model Context Protocol) tools across multiple categories. It provides backend-agnostic implementations that automatically adapt to your preferred Emacs packages.
 
 ## Features
 
@@ -111,7 +111,7 @@ This package extends [Claude Code IDE](https://github.com/Kaylebor/claude-code-i
 ### Prerequisites
 
 - Emacs 28.1+
-- [claude-code-ide](https://github.com/Kaylebor/claude-code-ide)
+- [claude-code-ide](https://github.com/manzaltu/claude-code-ide.el)
 
 ### Optional Enhancements
 
@@ -320,7 +320,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- [Claude Code IDE](https://github.com/Kaylebor/claude-code-ide) for the MCP infrastructure
+- [Claude Code IDE](https://github.com/manzaltu/claude-code-ide.el) for the MCP infrastructure
 - [Anthropic](https://anthropic.com) for the Model Context Protocol specification
 - The Emacs community for the excellent ecosystem of packages
 
