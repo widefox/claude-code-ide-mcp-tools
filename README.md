@@ -96,12 +96,12 @@ Our package adds **38 additional tools** with enhanced functionality, better bac
 *Requires yasnippet package*
 
 ### Documentation & Help (4 tools)
-- **describe_function** - Get Emacs function documentation
-- **describe_variable** - Get variable documentation
+- **describe_function** - Get Emacs function documentation (enhanced with helpful when available)
+- **describe_variable** - Get variable documentation (enhanced with helpful when available)
 - **apropos_command** - Find commands matching pattern
 - **which_key_help** - Check which-key mode status
 
-*Always available*
+*Always available, enhanced when helpful package is installed*
 
 ### TreeSitter Analysis (4 tools)
 - **treesit_analyze_structure** - Get complete syntax tree
@@ -140,6 +140,9 @@ For full functionality, consider installing:
 
 ;; Code snippets
 (use-package yasnippet)
+
+;; Enhanced help and documentation
+(use-package helpful)
 ```
 
 ### Via Package Manager

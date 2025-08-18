@@ -20,6 +20,11 @@
 (declare-function apropos-command "apropos")
 (declare-function which-key-show-keymap "which-key")
 
+;; helpful declarations (enhanced help when available)
+(declare-function helpful-function "helpful")
+(declare-function helpful-variable "helpful")
+(declare-function helpful-callable "helpful")
+
 ;; Code intelligence declarations
 (declare-function imenu--make-index-alist "imenu")
 (declare-function occur "replace")
@@ -31,18 +36,25 @@
   
   FUNCTION-NAME - Name of the function to describe
   
-  Includes usage examples, parameters, and detailed documentation."
+  Uses helpful when available for enhanced documentation including source code, 
+  examples, and cross-references. Falls back to standard describe-function."
   (progn
     (condition-case err
         (if (fboundp (intern function-name))
-            (let* ((func-symbol (intern function-name))
-                   (doc (documentation func-symbol))
-                   (type (cond ((commandp func-symbol) "Command")
-                              ((functionp func-symbol) "Function")
-                              (t "Symbol"))))
-              (format "%s: %s\n\nDocumentation:\n%s" 
-                      type function-name 
-                      (or doc "No documentation available.")))
+            (let ((func-symbol (intern function-name)))
+              (if (and (fboundp 'helpful-function) (fboundp 'helpful--pretty-print))
+                  ;; Use helpful for enhanced documentation
+                  (with-temp-buffer
+                    (helpful-function func-symbol)
+                    (buffer-string))
+                ;; Fall back to standard documentation
+                (let* ((doc (documentation func-symbol))
+                       (type (cond ((commandp func-symbol) "Command")
+                                  ((functionp func-symbol) "Function")
+                                  (t "Symbol"))))
+                  (format "%s: %s\n\nDocumentation:\n%s" 
+                          type function-name 
+                          (or doc "No documentation available.")))))
           (format "Function '%s' not found" function-name))
       (error
        (format "Error describing function '%s': %s"
@@ -53,18 +65,25 @@
   
   VARIABLE-NAME - Name of the variable to describe
   
-  Shows current value, purpose, and configuration options."
+  Uses helpful when available for enhanced documentation including source code,
+  usage examples, and cross-references. Shows current value, purpose, and configuration options."
   (progn
     (condition-case err
         (if (boundp (intern variable-name))
-            (let* ((var-symbol (intern variable-name))
-                   (doc (documentation-property var-symbol 'variable-documentation))
-                   (value (symbol-value var-symbol))
-                   (type (cond ((custom-variable-p var-symbol) "Custom Variable")
-                              (t "Variable"))))
-              (format "%s: %s\n\nCurrent Value:\n%S\n\nDocumentation:\n%s" 
-                      type variable-name value
-                      (or doc "No documentation available.")))
+            (let ((var-symbol (intern variable-name)))
+              (if (and (fboundp 'helpful-variable) (fboundp 'helpful--pretty-print))
+                  ;; Use helpful for enhanced documentation
+                  (with-temp-buffer
+                    (helpful-variable var-symbol)
+                    (buffer-string))
+                ;; Fall back to standard documentation
+                (let* ((doc (documentation-property var-symbol 'variable-documentation))
+                       (value (symbol-value var-symbol))
+                       (type (cond ((custom-variable-p var-symbol) "Custom Variable")
+                                  (t "Variable"))))
+                  (format "%s: %s\n\nCurrent Value:\n%S\n\nDocumentation:\n%s" 
+                          type variable-name value
+                          (or doc "No documentation available.")))))
           (format "Variable '%s' not found" variable-name))
       (error
        (format "Error describing variable '%s': %s"
