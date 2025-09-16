@@ -1,0 +1,86 @@
+# Byte-compiled / optimized / DLL files
+*.elc
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Emacs temporary files
+*~
+\#*\#
+.\#*
+.DS_Store
+
+# Emacs backups
+*.bak
+*~
+
+# Auto-save files
+\#*
+
+# Flycheck temporary files
+flycheck_*.el
+
+# Projectile files
+.projectile
+
+# Directory configuration
+.dir-locals.el
+
+# Package build artifacts
+*.tar
+*.gz
+
+# Elpa packages (if using local elpa)
+elpa/
+
+# Quelpa packages
+quelpa/
+
+# Straight packages
+straight/
+
+# Eln cache (native compilation)
+eln-cache/
+
+# GNU Global tags
+GPATH
+GRTAGS
+GTAGS
+
+# Ctags
+TAGS
+tags
+
+# LSP
+.lsp-session-*
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+
+# Log files
+*.log
+
+# Test coverage
+coverage/
+
+# Node modules (if any JS tooling)
+node_modules/
+
+# Python virtual environments (if any Python tooling)
+venv/
+env/
+.env
+
+# Local configuration files that shouldn't be shared
+.local.el
