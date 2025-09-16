@@ -9,12 +9,12 @@ This package extends [Claude Code IDE](https://github.com/manzaltu/claude-code-i
 
 ## Features
 
-- 🎯 **38 Additional MCP Tools** across 9 categories
-- 🔧 **Backend Agnostic** - works with lsp-mode/eglot, projectile/project.el, git/vc
-- 🚀 **Auto-Detection** - automatically uses the best available backend
-- 📦 **Zero Hard Dependencies** - works with vanilla Emacs, enhanced with optional packages
-- 🎨 **Modular Design** - enable only the tool categories you need
-- 🧪 **Well Tested** - comprehensive test suite included
+🎯 **38 Additional MCP Tools** across 9 categories
+🔧 **Backend Agnostic** - works with lsp-mode/eglot, projectile/project.el, git/vc
+🚀 **Auto-Detection** - automatically uses the best available backend
+📦 **Zero Hard Dependencies** - works with vanilla Emacs, enhanced with optional packages
+🎨 **Modular Design** - enable only the tool categories you need
+🧪 **Well Tested** - comprehensive test suite included
 
 ## Relationship to Claude Code IDE
 
