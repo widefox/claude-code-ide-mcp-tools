@@ -95,11 +95,13 @@ Our package adds **38 additional tools** with enhanced functionality, better bac
 
 *Requires yasnippet package*
 
-### Documentation & Help (4 tools)
+### Documentation & Help (6 tools)
 - **describe_function** - Get Emacs function documentation (enhanced with helpful when available)
 - **describe_variable** - Get variable documentation (enhanced with helpful when available)
 - **apropos_command** - Find commands matching pattern
 - **which_key_help** - Check which-key mode status
+- **occur_find_pattern** - Find pattern occurrences in file
+- **which_function_at_point** - Get function name at position
 
 *Always available, enhanced when helpful package is installed*
 
@@ -241,7 +243,7 @@ Once installed and configured, the tools are automatically available to Claude t
 - Manage git operations and project workflow
 
 Example Claude interaction:
-```
+```text
 Claude: I'll help you find that function definition.
 > Tool: find_definition("src/main.py", 42, 10)
 > Result: Found definition at src/utils.py:15:0
@@ -267,7 +269,7 @@ Claude: Let me navigate there and examine the code.
 
 ### Project Structure
 
-```
+```text
 claude-code-ide-mcp-tools/
 ├── claude-code-ide-mcp-tools.el         # Main entry point
 ├── claude-code-ide-mcp-tools-core.el    # Core utilities
