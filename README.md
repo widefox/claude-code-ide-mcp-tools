@@ -271,9 +271,9 @@ Claude: Let me navigate there and examine the code.
 | Feature | lsp-mode | eglot | xref | projectile | project.el | git | vc |
 |---------|----------|-------|------|------------|------------|-------|-----|
 | Symbol Info | ✅ Full | ✅ Basic | ✅ Basic | N/A | N/A | N/A | N/A |
-| Definitions | ✅ Full | 🚧 Planned | ✅ Basic | N/A | N/A | N/A | N/A |
+| Definitions | ✅ Full | 🚧 Planned | 🚧 Planned | N/A | N/A | N/A | N/A |
 | References | ✅ Full | 🚧 Planned | 🚧 Planned | N/A | N/A | N/A | N/A |
-| Project Files | N/A | N/A | N/A | ✅ Full | ✅ Basic | N/A | N/A |
+| Project Files | N/A | N/A | N/A | ✅ Full | 🚧 Planned | N/A | N/A |
 | Git Blame | N/A | N/A | N/A | N/A | N/A | ✅ Full | ✅ Basic |
 
 ✅ Full support &nbsp; ✅ Basic support &nbsp; 🚧 Planned &nbsp; N/A Not applicable
